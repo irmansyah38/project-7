@@ -8,5 +8,5 @@ extern String botToken;
 extern String chatID;
 
 void inializationTelegram();
-void handleNewMessages(int numNewMessages);
+void executeTelegram();
 #endif

@@ -6,6 +6,9 @@ String chatID;
 WiFiClientSecure client;
 UniversalTelegramBot bot(botToken, client);
 
+const unsigned long BOT_MTBS = 1000;
+unsigned long bot_lasttime;
+
 void inializationTelegram()
 {
   client.setCACert(TELEGRAM_CERTIFICATE_ROOT); // Add root certificate for api.telegram.org
@@ -45,5 +48,22 @@ void handleNewMessages(int numNewMessages)
     Serial.println(command);
 
     processMessage(command);
+  }
+}
+
+void executeTelegram()
+{
+  if (millis() - bot_lasttime > BOT_MTBS)
+  {
+    int numNewMessages = bot.getUpdates(bot.last_message_received + 1);
+
+    while (numNewMessages)
+    {
+      Serial.println("got response");
+      handleNewMessages(numNewMessages);
+      numNewMessages = bot.getUpdates(bot.last_message_received + 1);
+    }
+
+    bot_lasttime = millis();
   }
 }
