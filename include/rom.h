@@ -6,7 +6,7 @@
 
 void inializationRom();
 bool checkFromRom();
-void saveTelegramToRom();
+void saveTelegramToRom(String token, String chatid);
 void endRom();
 
 #endif
