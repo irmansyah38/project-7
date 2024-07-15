@@ -51,6 +51,19 @@ void handleNewMessages(int numNewMessages)
   }
 }
 
+bool checkTelegram(String token)
+{
+  bot.updateToken(token);
+  if (bot.getMe())
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+
 void executeTelegram()
 {
   if (millis() - bot_lasttime > BOT_MTBS)

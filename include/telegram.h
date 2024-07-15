@@ -8,5 +8,6 @@ extern String botToken;
 extern String chatID;
 
 void inializationTelegram();
+bool checkTelegram(String token);
 void executeTelegram();
 #endif
