@@ -5,5 +5,6 @@
 
 void inializationWifi();
 void executeWifi();
+bool isConnectedWifi();
 
 #endif
