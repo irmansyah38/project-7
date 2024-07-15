@@ -8,19 +8,21 @@ void inializationRom()
 {
   EEPROM.begin(EEPROM_SIZE);
 }
-void checkFromRom()
+
+bool checkFromRom()
 {
   String token;
   EEPROM.get(addressBotToken, token);
 
   if (token.length() >= 127)
   {
-    /* code */
+    return false;
   }
   else
   {
     botToken = token;
     EEPROM.get(addressChatID, chatID);
+    return true;
   }
 }
 
@@ -29,4 +31,9 @@ void saveTelegramToRom(String token, String chatid)
   EEPROM.put(addressBotToken, token);
   EEPROM.put(addressChatID, chatid);
   EEPROM.commit();
+}
+
+void endRom()
+{
+  EEPROM.end();
 }

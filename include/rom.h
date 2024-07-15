@@ -5,7 +5,8 @@
 #include "telegram.h"
 
 void inializationRom();
-void checkFromRom();
+bool checkFromRom();
 void saveTelegramToRom();
+void endRom();
 
 #endif
