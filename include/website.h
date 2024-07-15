@@ -7,5 +7,6 @@
 
 void inializationWebsite();
 void executeWebsite();
+bool isSubmited();
 
 #endif
