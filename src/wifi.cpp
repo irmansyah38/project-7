@@ -2,11 +2,12 @@
 
 WiFiManager wm;
 
+String ip;
+
 void inializationWifi()
 {
   WiFi.mode(WIFI_STA); // explicitly set mode, esp defaults to STA+AP
                        // put your setup code here, to run once:
-
   wm.setConfigPortalBlocking(false);
   wm.setConfigPortalTimeout(60);
   // automatically connect using saved credentials if they exist
@@ -31,6 +32,7 @@ bool isConnectedWifi()
 {
   if (WiFi.status() == WL_CONNECTED)
   {
+    ip = WiFi.localIP().toString();
     return true;
   }
   else
