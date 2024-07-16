@@ -33,6 +33,7 @@ bool isConnectedWifi()
   if (WiFi.status() == WL_CONNECTED)
   {
     ip = WiFi.localIP().toString();
+    ip += ":80";
     return true;
   }
   else
