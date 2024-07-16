@@ -78,13 +78,12 @@ const char index_html[] PROGMEM = R"rawliteral(
     }
   }
 
-  document.querySelector("form").addEventListener("submit", async function (event) {
+  document.querySelector(".form").addEventListener("submit", async function (event) {
     event.preventDefault();
     const botToken1 = document.getElementById("botToken").value
     const chatID1 = document.getElementById("chatID").value
     const remember1 = document.querySelector(".inp-cbx").checked
 
-    alert(remember)
     if (botToken1 == "" || chatID1 == "") {
       alertMessage(false, "Harus mengisi form")
       return
@@ -100,7 +99,7 @@ const char index_html[] PROGMEM = R"rawliteral(
     };
 
     try {
-      const response = await fetch(`http://${window.location.hostname}/token`, options)
+      const response = await fetch(`http://${window.location.hostname}/submit`, options)
       const data = await response.json();
 
       if (data.status == "success") {
