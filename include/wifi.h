@@ -3,6 +3,8 @@
 
 #include <WiFiManager.h>
 
+extern String ip;
+
 void inializationWifi();
 void executeWifi();
 bool isConnectedWifi();
