@@ -89,19 +89,22 @@ const char index_html[] PROGMEM = R"rawliteral(
       return
     }
 
-    const jsonData = { botToken: botToken1, chatID: chatID1, remember: remember1 };
+    const sendData = `botToken=${encodeURIComponent(botToken1)}&chatID=${encodeURIComponent(chatID1)}&remember=${encodeURIComponent(remember1)}`
     const options = {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/x-www-form-urlencoded',
+
       },
-      body: JSON.stringify(jsonData)
+      body: sendData
     };
+
+    console.log(sendData)
 
     try {
       const response = await fetch(`http://${window.location.hostname}/submit`, options)
       const data = await response.json();
-
+      console.log(data)
       if (data.status == "success") {
         alertMessage(true, "Berhasil Tersambung dengan telegram")
         setTimeout(() => {}, 2000);
@@ -125,28 +128,32 @@ void handlePageForm()
 
 void handleSubmit()
 {
+
   if (server.hasArg("botToken") && server.hasArg("chatID") && server.hasArg("remember"))
   {
     String token = server.arg("botToken");
 
     if (checkTelegram(token))
     {
+      Serial.println("masuk");
       botToken = token;
       chatID = server.arg("chatID");
       bool remember = server.arg("remember");
       if (remember)
       {
+        Serial.println("masuk");
         saveTelegramToRom(botToken, chatID);
       }
 
+      condition = true;
+
       String jsonResponse = "{\"status\": \"success\"}";
 
-      server.send(200, "application/json", jsonResponse);
-
-      condition = true;
+      server.send(400, "application/json", jsonResponse);
     }
     else
     {
+      Serial.println("tidak masuk");
       String jsonResponse = "{\"status\": \"failed\"}";
 
       server.send(400, "application/json", jsonResponse);
