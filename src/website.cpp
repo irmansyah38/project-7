@@ -183,12 +183,5 @@ void executeWebsite()
 
 bool isSubmited()
 {
-  if (condition)
-  {
-    return true;
-  }
-  else
-  {
-    return false;
-  }
+  return condition;
 }

@@ -11,10 +11,19 @@ void setup()
   inializationWifi();
   inializationWebsite();
   inializationLCD();
+  inializationTelegram();
 
   if (isConnectedWifi())
   {
     conditionMain = 1;
+  }
+
+  if (checkFromRom())
+  {
+    if (checkTelegram(botToken))
+    {
+      conditionMain = 2;
+    }
   }
 
   // put your setup code here, to run once:
@@ -31,11 +40,19 @@ void loop()
     {
       conditionMain = 1;
     }
-
     break;
   case 1:
     display("Masuk ke website dengan url : " + ip);
     executeWebsite();
+    if (isSubmited())
+    {
+      conditionMain = 2;
+    }
+
+    break;
+  case 2:
+    display("sudah terhubung telegram");
+    executeTelegram();
     break;
   }
   // put your main code here, to run repeatedly:

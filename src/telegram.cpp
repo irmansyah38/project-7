@@ -54,14 +54,7 @@ void handleNewMessages(int numNewMessages)
 bool checkTelegram(String token)
 {
   bot.updateToken(token);
-  if (bot.getMe())
-  {
-    return true;
-  }
-  else
-  {
-    return false;
-  }
+  return bot.getMe();
 }
 
 void executeTelegram()
